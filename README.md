@@ -5,7 +5,7 @@ This repository is the official implementation of Video Object Segmentation with
 It is designed for semi-supervised video object segmentation (VOS) task. 
 ![](assets/pipeline.png)
 
-## Requirements
+## 1. Requirements
 
 We build and test the repository on Python 3.6.9 and Ubuntu 18.04. 
 Run on Windows or Mac is possible with minor modifications. 
@@ -15,7 +15,7 @@ To install requirements:
 pip3 install -r requirements.txt
 ```
 
-## Evaluation
+## 2. Evaluation
 
 ### DAVIS17-TrainVal
 1. Download and extract [DAVIS17-TrainVal](https://data.vision.ee.ethz.ch/csergi/share/davis/DAVIS-2017-trainval-480p.zip) dataset.
@@ -51,7 +51,7 @@ To reproduce the segmentation scores, you can use the same tool from the DAVIS b
 
 By default, the segmentation results will be saved in `./output`.
 
-## Training
+## 3. Training
 
 ### Pre-training on Static Images
 
@@ -74,7 +74,7 @@ You may need minor modifications in the dataset path. Descriptions of useful opt
 2. `--palette`: Path to the palette image.
 3. `--workder`: The parallel threads number to accelerate the procedures (Default: 20).
 
-When the conversion process done, you can start pre-training the model:
+After the conversion process, you can start pre-training the model:
 ```bash
 python3 train.py --level 0 --dataset /path/to/pretrain/ --lr 1e-5 --scheduler-step 3 --total-epoch 12 --log
 ```  
@@ -85,17 +85,17 @@ Pre-training process may takes days to weeks, you can download our checkpoint to
 Download the semi-supervised TrainVal 480p from the [DAVIS](https://davischallenge.org/davis2017/code.html) website.
 Run 
 ```bash
-python3 train.py --level 1 --resume /path/to/PreTrain/checkpoint.pth --dataset /path/to/DAVIS17/ --lr 4e-6 --scheduler-step 200 --total-epoch 1000 --new --log
+python3 train.py --level 1 --new --resume /path/to/PreTrain/checkpoint.pth --dataset /path/to/DAVIS17/ --lr 4e-6 --scheduler-step 200 --total-epoch 1000 --log
 ``` 
 
 ### Training on YouTube-VOS
 Download the [YouTube-VOS](https://competitions.codalab.org/competitions/19544#participate-get_data) dataset.
 Run
 ```bash
-python3 train.py --level 2 --resume /path/to/PreTrain/checkpoint.pth --dataset /path/to/YouTubeVOS/train --lr 4e-6 --scheduler-step 30 --total-epoch 150 --new --log
+python3 train.py --level 2 --new --resume /path/to/PreTrain/checkpoint.pth --dataset /path/to/YouTubeVOS/train --lr 4e-6 --scheduler-step 30 --total-epoch 150 --log
 ```
 
-## Contributing
+## 4. License
 
 This repository is released for academic use only. If you want to use our codes for commercial products, please contact xinli@cct.lsu.edu in advance.
 If you use our codes, please cite our paper,
