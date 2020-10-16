@@ -19,7 +19,7 @@ pip3 install -r requirements.txt
 
 ### DAVIS17-TrainVal
 1. Download and extract [DAVIS17-TrainVal](https://data.vision.ee.ethz.ch/csergi/share/davis/DAVIS-2017-trainval-480p.zip) dataset.
-2. Download the pretrained DAVIS17 checkpoint.
+2. Download the pretrained DAVIS17 [checkpoint](http://www.ece.lsu.edu/xinli/Codes/NeurIPS20_level1_DAVIS17.pth).
 3. run:
 ```bash
 python3 eval.py --level 1 --resume /path/to/checkpoint.pth/ --dataset /path/to/dir/
@@ -28,21 +28,28 @@ To reproduce the segmentation scores, you can use the official evaluation [tool]
 
 ### YouTube-VOS18
 1. Download and extract [YouTube-VOS18](https://competitions.codalab.org/competitions/19544#participate-get_data) dataset.
-2. Download the pretrained YouTube-VOS18 checkpoint.
+2. Download the pretrained YouTube-VOS18 [checkpoint](http://www.ece.lsu.edu/xinli/Codes/NeurIPS20_level2_YouTubeVOS.pth).
 3. run:
 ```bash
 python3 eval.py --level 2 --resume /path/to/checkpoint.pth/ --dataset /path/to/dir/ --update-rate 0.05
 ```
 Attention: Directly submit our results to the YouTube-VOS codalab for evaluation will pollute the leader board.
 
-### Long-time Video
-1. Download and extract [Long-time Video](https://competitions.codalab.org/competitions/19544#participate-get_data) dataset.
-2. Download the pretrained long-time video checkpoint.
+### Long Videos
+1. Download and extract [Long Videos](https://www.kaggle.com/gvclsu/long-videos) dataset.
+2. Download the pretrained YouTube-VOS18 checkpoint above.
 3. run:
 ```bash
 python3 eval.py --level 3 --resume /path/to/checkpoint.pth/ --dataset /path/to/dir/ --update-rate 0.05
 ```
 To reproduce the segmentation scores, you can use the same tool from the DAVIS benchmark.
+
+### Your Own Video
+
+Prepare your video frames and the first frame annotation following the data structure of the long videos page.
+You can see the data structure without download it and you only need to provide the first frame annotation.
+
+Run the same parameters as the long videos setting.
 
 ### Options for Evaluation
 1. `--gpu`: GPU id to run (default: 0).
@@ -55,7 +62,7 @@ By default, the segmentation results will be saved in `./output`.
 
 ### Pre-training on Static Images
 
-1. Download the following the datasets.
+1. Download the following the datasets. You don't have to all, COCO is the largest one.
 2. Download the mask [palette image](assets/mask_palette.png) (followed DAVIS), which provides the color map of objects. 
 3. Run `unify_pretrain_dataset.py` to convert them into a uniform format (followed DAVIS).
 ```bash
@@ -78,7 +85,7 @@ After the conversion process, you can start pre-training the model:
 ```bash
 python3 train.py --level 0 --dataset /path/to/pretrain/ --lr 1e-5 --scheduler-step 3 --total-epoch 12 --log
 ```  
-Pre-training process may takes days to weeks, you can download our checkpoint to save time.
+Pre-training process may takes days to weeks, you can download our [checkpoint](http://www.ece.lsu.edu/xinli/Codes/NeurIPS20_level0_PreTrain.pth) to save time.
 
 ### Training on DAVIS17
 
@@ -89,7 +96,7 @@ python3 train.py --level 1 --new --resume /path/to/PreTrain/checkpoint.pth --dat
 ``` 
 
 ### Training on YouTube-VOS
-Download the [YouTube-VOS](https://competitions.codalab.org/competitions/19544#participate-get_data) dataset.
+Download training set of the [YouTube-VOS](https://competitions.codalab.org/competitions/19544#participate-get_data) dataset.
 Run
 ```bash
 python3 train.py --level 2 --new --resume /path/to/PreTrain/checkpoint.pth --dataset /path/to/YouTubeVOS/train --lr 4e-6 --scheduler-step 30 --total-epoch 150 --log
@@ -103,7 +110,7 @@ If you use our codes, please cite our paper,
 @inproceedings{liang2020video,
   title={Video Object Segmentation with Adaptive Feature Bank and Uncertain-Region Refinement},
   author={Liang, Yongqing and Li, Xin and Jafari, Navid and Chen, Qin},
-  booktitle={Advances in neural information processing systems},
+  booktitle={Advances in neural information processing systems (NeurIPS)},
   year={2020}
 }
 ```
