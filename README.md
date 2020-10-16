@@ -15,6 +15,8 @@ To install requirements:
 pip3 install -r requirements.txt
 ```
 
+Install the package [torch_scatter](https://github.com/rusty1s/pytorch_scatter) by the official instructions. Our version is 2.0.4.
+
 ## 2. Evaluation
 
 ### DAVIS17-TrainVal
