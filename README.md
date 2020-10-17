@@ -35,7 +35,8 @@ To reproduce the segmentation scores, you can use the official evaluation [tool]
 ```bash
 python3 eval.py --level 2 --resume /path/to/checkpoint.pth/ --dataset /path/to/dir/ --update-rate 0.05
 ```
-Attention: Directly submit our results to the YouTube-VOS codalab for evaluation will pollute the leader board.
+**Attention**: Directly submit our results to the YouTube-VOS codalab for evaluation will pollute the leader board.
+We encourage you to submit your own results.
 
 ### Long Videos
 1. Download and extract [Long Videos](https://www.kaggle.com/gvclsu/long-videos) dataset.
