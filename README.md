@@ -7,10 +7,10 @@ It is designed for semi-supervised video object segmentation (VOS) task.
 
 ## 1. Requirements
 
-We build and test the repository on Python 3.6.9 and Ubuntu 18.04. 
+We built and tested the repository on Python 3.6.9 and Ubuntu 18.04 with one NVIDIA 1080Ti card (11GB Memory).
 Run on Windows or Mac is possible with minor modifications. 
 An NVIDIA GPU card and CUDA environment are required.
-To install requirements:
+To install requirements, run:
 ```bash
 pip3 install -r requirements.txt
 ```
