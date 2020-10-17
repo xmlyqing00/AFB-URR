@@ -16,10 +16,12 @@ torch.set_grad_enabled(False)
 
 def get_args():
     parser = argparse.ArgumentParser(description='Eval AFB-URR')
-    parser.add_argument('--gpu', type=int, help='0, 1, 2', default=0)
+    parser.add_argument('--gpu', type=int, default=0,
+                        help='GPU card id.')
     parser.add_argument('--level', type=int, default=1, required=True,
                         help='1: DAVIS17. 2: Youtube-VOS. 3: LongVideo')
-    parser.add_argument('--budget', type=int, default='300000')
+    parser.add_argument('--budget', type=int, default='300000',
+                        help='Max number of features that feature bank can store. Default: 300000')
     parser.add_argument('--viz', action='store_true',
                         help='Visualize data.')
     parser.add_argument('--dataset', type=str, default=None, required=True,
@@ -29,9 +31,9 @@ def get_args():
     parser.add_argument('--prefix', type=str,
                         help='Prefix to the model name.')
     parser.add_argument('--update-rate', type=float, default=0.1,
-                        help='Update Rate.')
+                        help='Update Rate. Impact of merging new features.')
     parser.add_argument('--merge-thres', type=float, default=0.95,
-                        help='Merge Rate.')
+                        help='Merging Rate. If similarity higher than this, then merge, else append.')
     return parser.parse_args()
 
 

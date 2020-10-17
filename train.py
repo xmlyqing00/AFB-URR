@@ -16,7 +16,8 @@ import myutils
 
 def get_args():
     parser = argparse.ArgumentParser(description='Train AFB-URR')
-    parser.add_argument('--gpu', type=int, help='0, 1, 2', default=0)
+    parser.add_argument('--gpu', type=int, default=0,
+                        help='GPU card id.')
     parser.add_argument('--dataset', type=str, default=None, required=True,
                         help='Dataset folder.')
     parser.add_argument('--seed', type=int, default=-1,
@@ -28,18 +29,21 @@ def get_args():
     parser.add_argument('--lr', type=float, default=1e-5,
                         help='Learning rate, default 1e-5.')
     parser.add_argument('--lu', type=float, default=0.5,
-                        help='Regularization rate, default 0.5.')
+                        help='Regularization factor, default 0.5.')
     parser.add_argument('--resume', type=str,
                         help='Path to the checkpoint (default: none)')
     parser.add_argument('--new', action='store_true',
                         help='Train the model from the begining.')
     parser.add_argument('--scheduler-step', type=int, default=25,
-                        help='Scheduler step size. Default 1.')
+                        help='Scheduler step size. Default 25.')
     parser.add_argument('--total-epochs', type=int, default=100,
-                        help='Total running epochs. Default 200.')
-    parser.add_argument('--budget', type=int, default=200000)
-    parser.add_argument('--obj-n', type=int, default=3)
-    parser.add_argument('--clip-n', type=int, default=6)  # 6
+                        help='Total running epochs. Default 100.')
+    parser.add_argument('--budget', type=int, default=300000,
+                        help='Max number of features that feature bank can store. Default: 300000')
+    parser.add_argument('--obj-n', type=int, default=3,
+                        help='Max number of objects that will be trained at the same time.')
+    parser.add_argument('--clip-n', type=int, default=6,
+                        help='Max frames that will be sampled as a batch.')
 
     return parser.parse_args()
 
@@ -125,20 +129,6 @@ def run_maintrain(model, dataloader, criterion, optimizer):
         # For debug
         # print(info)
         # myutils.vis_result(frames, masks, scores)
-
-        # Save tmp model
-        if iter_idx == 40000 or iter_idx == 80000 or iter_idx == 130000:
-            checkpoint = {
-                'epoch': iter_idx,
-                'model': model.state_dict(),
-                'optimizer': optimizer.state_dict(),
-                'loss': stats.avg,
-                'seed': -1,
-            }
-
-            cp_path = f'tmp/cp_{iter_idx}.pth'
-            torch.save(checkpoint, cp_path)
-            print('Save to', cp_path)
 
     progress_bar.close()
 
@@ -242,14 +232,6 @@ def main():
 
 
 if __name__ == '__main__':
-
-    # Pretrain
-    # --level 0 --scheduler-step 1 --total-epoch 5
-    # DAVIS 17
-    # --log --level 1 --lr 1e-5 --clip-n 3 --new --resume logs/level0_20200505-141005/model/epoch_003_loss_0.020.pth
-    # --level 1 --lr 1e-5 --local --new --resume logs/level0_20200505-141005/model/epoch_003_loss_0.020.pth
-    # DAVIS17 + entire
-    # --local --level 1 --new --resume logs/level0_20200505-141005/model/epoch_003_loss_0.020.pth --log --clip-n 4 --lr 5e-6
 
     args = get_args()
     print(myutils.gct(), f'Args = {args}')
