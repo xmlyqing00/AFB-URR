@@ -3,7 +3,11 @@
 
 This repository is the official implementation of Video Object Segmentation with Adaptive Feature Bank and Uncertain-Region Refinement (NeurIPS 2020).
 It is designed for semi-supervised video object segmentation (VOS) task. 
+
+[\[paper\]](http://arxiv.org/abs/2010.07958)
+
 ![](assets/pipeline.png)
+
 
 ## 1. Requirements
 
