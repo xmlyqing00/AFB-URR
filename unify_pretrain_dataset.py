@@ -19,7 +19,7 @@ except ImportError as e:
 def get_args():
     parser = argparse.ArgumentParser(description='Unify Pretrain Dataset')
     parser.add_argument('--dst', type=str, default='/Ship01/Dataset/VOS/pretrain')
-    parser.add_argument('--palette', type=str, default='/Ship01/Dataset/VOS/pretrain/mask_palette.png')
+    parser.add_argument('--palette', type=str, default='./assets/mask_palette.png')
     parser.add_argument('--worker', type=int, default=10, help='Threads number.')
     parser.add_argument('--name', type=str, required=True)
     parser.add_argument('--src', type=str, required=True)

@@ -12,7 +12,7 @@ import myutils
 
 class PreTrain_DS(data.Dataset):
 
-    def __init__(self, root, output_size, dataset_file='dataset/pretrain.txt', clip_n=3, max_obj_n=11):
+    def __init__(self, root, output_size, dataset_file='./assets/pretrain.txt', clip_n=3, max_obj_n=11):
         self.root = root
         self.clip_n = clip_n
         self.output_size = output_size

@@ -70,8 +70,7 @@ By default, the segmentation results will be saved in `./output`.
 ### Pre-training on Static Images
 
 1. Download the following the datasets. You don't have to all, COCO is the largest one.
-2. Download the mask [palette image](assets/mask_palette.png) (followed DAVIS), which provides the color map of objects. 
-3. Run `unify_pretrain_dataset.py` to convert them into a uniform format (followed DAVIS).
+2. Run `unify_pretrain_dataset.py` to convert them into a uniform format (followed DAVIS).
 ```bash
 python3 unify_pretrain_dataset.py --name NAME --src /path/to/dataset/dir/
 ```
@@ -85,7 +84,7 @@ python3 unify_pretrain_dataset.py --name NAME --src /path/to/dataset/dir/
 You may need minor modifications in the dataset path. Descriptions of useful options,
 
 1. `--dst`: Path to the output dataset.
-2. `--palette`: Path to the palette image.
+2. `--palette`: Path to the palette image. We provide a template in `assets/mask_palette.png`, followed the formats of DAVIS17.
 3. `--workder`: The parallel threads number to accelerate the procedures (Default: 20).
 
 After the conversion process, you can start pre-training the model:
