@@ -52,7 +52,7 @@ class FeatureBank:
             unique_related_bank_idx, cnt = class_related_bank_idx.unique(dim=0, return_counts=True)  # selected_HW
 
             # Update key
-            key_bank_update = torch.zeros((d_key, bank_n), dtype=torch.float).cuda()  # d_key, THW
+            key_bank_update = torch.zeros((d_key, bank_n), dtype=torch.float, device=self.device)  # d_key, THW
             key_bank_idx = class_related_bank_idx.unsqueeze(0).expand(d_key, -1)  # d_key, HW
             scatter_mean(normed_prev_key[:, selected_idx[:, 0]], key_bank_idx, dim=1, out=key_bank_update)
             # d_key, selected_HW
@@ -66,7 +66,7 @@ class FeatureBank:
             normed_values = NF.normalize(self.values[class_idx], dim=0)
             normed_prev_value = NF.normalize(prev_value[class_idx], dim=0)
             mag_values = self.values[class_idx].norm(p=2, dim=0)
-            val_bank_update = torch.zeros((d_val, bank_n), dtype=torch.float).cuda()
+            val_bank_update = torch.zeros((d_val, bank_n), dtype=torch.float, device=self.device)
             val_bank_idx = class_related_bank_idx.unsqueeze(0).expand(d_val, -1)
             scatter_mean(normed_prev_value[:, selected_idx[:, 0]], val_bank_idx, dim=1, out=val_bank_update)
 
