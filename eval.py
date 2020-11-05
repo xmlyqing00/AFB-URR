@@ -299,7 +299,7 @@ if __name__ == '__main__':
     else:
         raise ValueError('CUDA is required. --gpu must be >= 0.')
 
-    palette = Image.open(os.path.join(args.dataset, 'mask_palette.png')).getpalette()
+    palette = Image.open(os.path.join('./assets/mask_palette.png')).getpalette()
 
     main()
 

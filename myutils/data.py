@@ -38,7 +38,7 @@ def vis_sample(sample, name, tmp_dir='./tmp/'):
 
 
 def vis_result(frames, masks, scores, tmp_dir='./tmp/'):
-    palette = Image.open(os.path.join(tmp_dir, 'mask_palette.png')).getpalette()
+    palette = Image.open(os.path.join('assets/mask_palette.png')).getpalette()
     for i in range(frames.shape[0]):
         img = TF.to_pil_image(frames[i].cpu())
         img.save(os.path.join(tmp_dir, f'{i}_img.png'))
