@@ -48,58 +48,12 @@ def get_args():
     return parser.parse_args()
 
 
-def run_pretrain(model, dataloader, criterion, optimizer):
-    stats = myutils.AvgMeter()
-
-    progress_bar = tqdm(dataloader, desc='Pre Train')
-    for iter_idx, sample in enumerate(progress_bar):
-        frames, masks, obj_n, info = sample
-
-        if obj_n.item() == 1:
-            continue
-
-        frames, masks = frames[0].to(device), masks[0].to(device)
-
-        # with torch.autograd.detect_anomaly():
-
-        k4, v4 = model.memorize(frames[0:1], masks[0:1])
-        scores = model.segment(frames[1:], k4, v4)
-        label = torch.argmax(masks[1:], dim=1).long()
-
-        optimizer.zero_grad()
-        loss = criterion(scores, label)
-        loss.backward()
-        optimizer.step()
-
-        stats.update(loss.item())
-        progress_bar.set_postfix(loss=('%.6f' % stats.avg))
-        progress_bar.update(1)
-
-        # Save tmp model
-        if iter_idx == 40000 or iter_idx == 80000:
-            checkpoint = {
-                'epoch': iter_idx,
-                'model': model.state_dict(),
-                'optimizer': optimizer.state_dict(),
-                'loss': stats.avg,
-                'seed': -1,
-            }
-
-            cp_path = f'tmp/cp_{iter_idx}.pth'
-            torch.save(checkpoint, cp_path)
-            print('Save to', cp_path)
-
-    progress_bar.close()
-
-    return stats.avg
-
-
-def run_maintrain(model, dataloader, criterion, optimizer):
+def train_model(model, dataloader, criterion, optimizer, desc):
 
     stats = myutils.AvgMeter()
     uncertainty_stats = myutils.AvgMeter()
 
-    progress_bar = tqdm(dataloader, desc='Main Train')
+    progress_bar = tqdm(dataloader, desc=desc)
     for iter_idx, sample in enumerate(progress_bar):
         frames, masks, obj_n, info = sample
 
@@ -140,10 +94,13 @@ def main():
 
     if args.level == 0:
         dataset = PreTrain_DS(args.dataset, output_size=400, clip_n=args.clip_n, max_obj_n=args.obj_n)
+        desc = 'Pre Train'
     elif args.level == 1:
         dataset = DAVIS_Train_DS(args.dataset, output_size=400, clip_n=args.clip_n, max_obj_n=args.obj_n)
+        desc = 'Train DAVIS17'
     elif args.level == 2:
         dataset = YouTube_Train_DS(args.dataset, output_size=400, clip_n=args.clip_n, max_obj_n=args.obj_n)
+        desc = 'Train YV18'
     else:
         raise ValueError(f'{args.level} is unknown.')
 
@@ -203,7 +160,7 @@ def main():
         print('')
         print(myutils.gct(), f'Epoch: {epoch} lr: {lr}')
 
-        loss = run_maintrain(model, dataloader, criterion, optimizer)
+        loss = train_model(model, dataloader, criterion, optimizer, desc)
         if args.log:
 
             checkpoint = {

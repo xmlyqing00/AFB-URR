@@ -300,7 +300,7 @@ class AFB_URR(nn.Module):
 
         if self.training:
             uncertainty = myutils.calc_uncertainty(NF.softmax(score, dim=1))
-            uncertainty = uncertainty.view(bs, -1).norm(p=2, dim=1) / math.sqrt(frame.shape[-2] * frame.shape[-1])
+            uncertainty = uncertainty.view(bs, -1).norm(p=2, dim=1) / math.sqrt(frame.shape[-2] * frame.shape[-1])  # [B,1,H,W]
             uncertainty = uncertainty.mean()
         else:
             uncertainty = None

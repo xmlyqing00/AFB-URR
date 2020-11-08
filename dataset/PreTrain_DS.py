@@ -37,11 +37,11 @@ class PreTrain_DS(data.Dataset):
                         dataset_list.append(dataset_name)
                         self.img_list += img_list
                         self.mask_list += mask_list
+                        print(f'\t{dataset_name}: {len(img_list)} imgs.')
                     else:
-                        print(
-                            f'PreTrain dataset {dataset_name} has {len(img_list)} imgs and {len(mask_list)} annots. Not match! Skip.')
+                        print(f'\tPreTrain dataset {dataset_name} has {len(img_list)} imgs and {len(mask_list)} annots. Not match! Skip.')
                 else:
-                    print(f'PreTrain dataset {dataset_name} doesn\'t exist. Skip.')
+                    print(f'\tPreTrain dataset {dataset_name} doesn\'t exist. Skip.')
 
         print(myutils.gct(), f'{len(self.img_list)} imgs are used for PreTrain. They are from {dataset_list}.')
 
