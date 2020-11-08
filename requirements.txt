@@ -1,5 +1,4 @@
 tqdm
-glob
 numpy
 tensorboardX
 scipy
