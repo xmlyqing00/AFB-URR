@@ -44,7 +44,7 @@ class EncoderM(nn.Module):
 
         self.res2 = resnet.layer1  # 1/4, 256
         self.res3 = resnet.layer2  # 1/8, 512
-        self.res4 = resnet.layer3  # 1/8, 1024
+        self.res4 = resnet.layer3  # 1/16, 1024
 
         self.register_buffer('mean', torch.FloatTensor([0.485, 0.456, 0.406]).view(1, 3, 1, 1))
         self.register_buffer('std', torch.FloatTensor([0.229, 0.224, 0.225]).view(1, 3, 1, 1))
@@ -58,7 +58,7 @@ class EncoderM(nn.Module):
         x = self.maxpool(r1)  # 1/4, 64
         r2 = self.res2(x)  # 1/4, 256
         r3 = self.res3(r2)  # 1/8, 512
-        r4 = self.res4(r3)  # 1/8, 1024
+        r4 = self.res4(r3)  # 1/16, 1024
 
         return r4, r1
 
