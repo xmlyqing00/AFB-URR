@@ -296,7 +296,7 @@ class AFB_URR(nn.Module):
         feature_size = (bs, obj_n, r1_size[2], r1_size[3])
         score = self.decoder(res_global, r3, r2, r1, feature_size)
 
-        score = score.view(bs, obj_n, *frame.shape[-2:])
+        score = score.view(obj_n, bs, *frame.shape[-2:]).permute(1, 0, 2, 3)
 
         if self.training:
             uncertainty = myutils.calc_uncertainty(NF.softmax(score, dim=1))
