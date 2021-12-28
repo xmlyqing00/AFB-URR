@@ -64,8 +64,8 @@ def cvt_mask_palette(data):
 
 
 def cvt_MSRA10K():
-    img_list = sorted(glob(os.path.join(args.src, 'MARA10K_Imgs_GT/Imgs/', '*.jpg')), key=lambda x: (len(x), x))
-    mask_list = sorted(glob(os.path.join(args.src, 'MARA10K_Imgs_GT/Imgs/', '*.png')), key=lambda x: (len(x), x))
+    img_list = sorted(glob(os.path.join(args.src, 'MSRA10K_Imgs_GT/Imgs/', '*.jpg')), key=lambda x: (len(x), x))
+    mask_list = sorted(glob(os.path.join(args.src, 'MSRA10K_Imgs_GT/Imgs/', '*.png')), key=lambda x: (len(x), x))
 
     dst_img_dir = os.path.join(args.dst, 'JPEGImages', args.name)
     dst_mask_dir = os.path.join(args.dst, 'Annotations', args.name)
