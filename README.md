@@ -128,3 +128,6 @@ If you use our codes, please cite our paper,
  year = {2020}
 }
 ```
+
+## 5. Update Logs
+- 2022/04/24 Update the evaluation script for long video benchmark.
