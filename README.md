@@ -8,6 +8,7 @@ It is designed for semi-supervised video object segmentation (VOS) task.
 [\[Paper\]](https://proceedings.neurips.cc/paper/2020/file/234833147b97bb6aed53a8f4f1c7a7d8-Paper.pdf)
 [\[Supplementary\]](https://proceedings.neurips.cc/paper/2020/file/234833147b97bb6aed53a8f4f1c7a7d8-Supplemental.zip)
 
+![](assets/afb-urr-compressed.gif)
 
 ![](assets/pipeline.png)
 
