@@ -31,7 +31,7 @@ Install the package [torch_scatter](https://github.com/rusty1s/pytorch_scatter) 
 
 ### DAVIS17-TrainVal
 1. Download and extract [DAVIS17-TrainVal](https://data.vision.ee.ethz.ch/csergi/share/davis/DAVIS-2017-trainval-480p.zip) dataset.
-2. Download the pretrained DAVIS17 [checkpoint](https://drive.google.com/file/d/1l9TXNV4YQMAxL8RqfL14-qofn_s641Dx/view?usp=sharing).
+2. Download the pretrained DAVIS17 [checkpoint](https://huggingface.co/xmlyqing00/AFB-URR/tree/main).
 3. run:
 ```bash
 python3 eval.py --level 1 --resume /path/to/checkpoint.pth/ --dataset /path/to/dir/
@@ -40,7 +40,7 @@ To reproduce the segmentation scores, you can use the official evaluation [tool]
 
 ### YouTube-VOS18
 1. Download and extract [YouTube-VOS18](https://competitions.codalab.org/competitions/19544#participate-get_data) dataset.
-2. Download the pretrained YouTube-VOS18 [checkpoint](https://drive.google.com/file/d/1l9TXNV4YQMAxL8RqfL14-qofn_s641Dx/view?usp=sharing).
+2. Download the pretrained YouTube-VOS18 [checkpoint](https://huggingface.co/xmlyqing00/AFB-URR/tree/main).
 3. run:
 ```bash
 python3 eval.py --level 2 --resume /path/to/checkpoint.pth/ --dataset /path/to/dir/ --update-rate 0.05
@@ -95,7 +95,7 @@ After the conversion process, you can start pre-training the model:
 ```bash
 python3 train.py --level 0 --dataset /path/to/pretrain/ --lr 1e-5 --scheduler-step 3 --total-epoch 12 --log
 ```  
-Pre-training process may takes days to weeks, you can download our [checkpoint](https://drive.google.com/file/d/1l9TXNV4YQMAxL8RqfL14-qofn_s641Dx/view?usp=sharing) to save time.
+Pre-training process may takes days to weeks, you can download our [checkpoint](https://huggingface.co/xmlyqing00/AFB-URR/tree/main) to save time.
 
 ### Training on DAVIS17
 
